@@ -102,7 +102,8 @@ public class Menu {
         numero = entradaUsuario.nextInt();
         System.out.println("Introduzca el numero de piso:");
         piso = entradaUsuario.nextInt();
-        System.out.flush();
+        entradaUsuario.next();
+        //System.out.flush();
         System.out.println("Introduzca el nombre del propietario:");  // reparar porque se salta este paso.
         propietario = entradaUsuario.nextLine();
         System.out.println("Introduzca el año de la fecha en que inicia el cedido:");
@@ -342,8 +343,6 @@ public class Menu {
             System.out.println("Si: introduzca un 1, No: introduzca un 0:");
             respuesta = entradaUsuario.nextInt();
         }
-
-        // if(respuesta != 1){ }
 
         entradaUsuario.close();
         return p;
