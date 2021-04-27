@@ -46,12 +46,13 @@ public class ControlDeEntradas {
                 b = entradaUsuario.nextBoolean();
                 b2 = true;
             }catch(InputMismatchException e){
-                System.out.println("Esntrada invalida!");
+                System.out.println("Entrada invalida!");
                 b2 = false;
             }
-
         }while(!b2);
+
         entradaUsuario.close();
+
         return b;
     }
 }
