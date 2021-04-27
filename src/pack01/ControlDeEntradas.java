@@ -2,6 +2,7 @@ package pack01;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.time.*;
 
 public class ControlDeEntradas {
 
@@ -54,5 +55,33 @@ public class ControlDeEntradas {
         entradaUsuario.close();
 
         return b;
+    }
+
+    public static LocalDate entradaFecha(){
+
+        int anio;
+        int mes;
+        int dia;
+
+        LocalDate date;
+
+        Scanner entradaUsuario = new Scanner(System.in);
+
+        do{
+            System.out.println("Introduzca el año: ");
+            anio = entradaUsuario.nextInt();
+        }while(anio < 0);
+        do{
+            System.out.println("Introduzca el mes: ");
+            mes = entradaUsuario.nextInt();
+        }while(mes < 0 || mes > 12);
+        do{
+            System.out.println("Introduzca el dia:");
+            dia = entradaUsuario.nextInt();
+        }while ((dia < 0)|| (dia > 31) || (mes == 4 && mes == 6 && mes == 9 && mes == 11) && (dia > 30) || (mes == 2) && (dia > 29));
+
+        date = LocalDate.of(anio, mes, dia);
+
+        return date;
     }
 }

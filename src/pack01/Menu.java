@@ -72,9 +72,7 @@ public class Menu {
 
     }
     public Puerta insertarPuerta(){
-        int anio;
-        int mes;
-        int dia;
+        
         String codigo;
         String direccion;
         int numero;
@@ -95,71 +93,35 @@ public class Menu {
         Scanner entradaUsuario = new Scanner(System.in);
 
         System.out.println("Introduzca el codigo de puerta: ");
-        codigo = entradaUsuario.nextLine();
+        codigo = ControlDeEntradas.entradaString();
         System.out.println("Introduzca la direccio de la puerta: ");
-        direccion = entradaUsuario.nextLine();
+        direccion = ControlDeEntradas.entradaString();
         System.out.println("Introduzca el numero: ");
-        numero = entradaUsuario.nextInt();
+        numero = ControlDeEntradas.entradaoEnteroPositivo();
         System.out.println("Introduzca el numero de piso:");
-        piso = entradaUsuario.nextInt();
-        entradaUsuario.next();
-        //System.out.flush();
+        piso = ControlDeEntradas.entradaoEnteroPositivo();
         System.out.println("Introduzca el nombre del propietario:");  // reparar porque se salta este paso.
-        propietario = entradaUsuario.nextLine();
-        System.out.println("Introduzca el año de la fecha en que inicia el cedido:");
-        anio = entradaUsuario.nextInt();
-        System.out.println("Introduzca el numero del mes:");
-        mes = entradaUsuario.nextInt();
-        System.out.println("Introduzca el numero de dia:");
-        dia = entradaUsuario.nextInt();
-        inicioCedido = LocalDate.of(anio, mes, dia);
-        System.out.println("Introduzca el año del fin del cedido:");
-        anio = entradaUsuario.nextInt();
-        System.out.println("Ahora, introduzca el numero del mes:");
-        mes = entradaUsuario.nextInt();
-        System.out.println("Introduzca el numero del dia:");
-        dia = entradaUsuario.nextInt();
-        finalCedido = LocalDate.of(anio, mes, dia);
+        propietario = ControlDeEntradas.entradaString();
+        System.out.println("Ahora se le pedira la fecha del inicio del cedido:");
+        inicioCedido = ControlDeEntradas.entradaFecha();
+        System.out.println("Ahora se le pedira la fecha del final del cedido:");
+        finalCedido = ControlDeEntradas.entradaFecha();
         System.out.println("Introduzca los metros cuadrados:");
-        metrosCuadrados = entradaUsuario.nextFloat();
+        metrosCuadrados = ControlDeEntradas.entradaFlotantePositivo();
         System.out.println("Introduzca el numero de camas:");
-        numeroCamas = entradaUsuario.nextInt();
-        System.out.println("Marque 1 si en la puerta hay baño propio, 0 si no lo hay:");
-        if(entradaUsuario.nextInt() == 1){
-            bano = true;
-        }else{
-            bano = false;
-        }
-        System.out.println("Marque un 1 si hay comedor, 0 si no lo hay:");
-        if(entradaUsuario.nextInt() == 1){
-            comedor = true;
-        }else{
-            comedor = false;
-        }
-        System.out.println("Introduzca un 1 si hay servicio de comida, un 0 si no lo hay:");
-        if(entradaUsuario.nextInt() == 1){
-            servicioComida = true;
-        }else{
-            servicioComida = false;
-        }
+        numeroCamas = ControlDeEntradas.entradaoEnteroPositivo();
+        System.out.println("Dispone de baño?:");
+        bano = ControlDeEntradas.entradaBoolean();
+        System.out.println("Dispone de comedor?::");
+        comedor = ControlDeEntradas.entradaBoolean();
+        System.out.println("Dispone de servicio de comida?:");
+        servicioComida = ControlDeEntradas.entradaBoolean();
         System.out.println("Introduzca un 1 si hay internet, 0 de lo contrario:");
-        if(entradaUsuario.nextInt() == 1){
-            internet = true;
-        }else{
-            internet = false;
-        }
+        internet = ControlDeEntradas.entradaBoolean();
         System.out.println("Si es exterior, introduzca 1, de lo contrario, un 0:");
-        if(entradaUsuario.nextInt() == 1){
-            exterior = true;
-        }else{
-            exterior = false;
-        }
+        exterior = ControlDeEntradas.entradaBoolean();
         System.out.println("Introduzca un 1 si es planta baja, de lo contrario un 0:");
-        if(entradaUsuario.nextInt() == 1){
-            plantaBaja = true;
-        }else{
-            plantaBaja = false;
-        }
+        plantaBaja = ControlDeEntradas.entradaBoolean();
 
         ocupado = false;
 
@@ -183,10 +145,9 @@ public class Menu {
         System.out.println("Planta baja: " + p.getPlantaBaja());
 
         System.out.println("\n\nSon correctos estos datos?");
-        System.out.println("Si: introduzca un 1, No: introduzca un 0:");
-        int respuesta = entradaUsuario.nextInt();
+        boolean respuesta = ControlDeEntradas.entradaBoolean();
 
-        while(respuesta != 1){
+        while(!respuesta){
             System.out.println("Que doato desea corregir?");
             System.out.println("1. Codigo.");
             System.out.println("2. Direccion.");
@@ -211,111 +172,77 @@ public class Menu {
             switch (opc){
                 case 1:
                     System.out.println("Introduzca el codigo de puerta: ");
-                    codigo = entradaUsuario.nextLine();
+                    codigo = ControlDeEntradas.entradaString();
                     p.setCodigo(codigo);
                     break;
                 case 2:
                     System.out.println("Introduzca la direccion:");
-                    direccion = entradaUsuario.nextLine();
+                    direccion = ControlDeEntradas.entradaString();
                     p.setDireccion(direccion);
                     break;
                 case 3:
                     System.out.println("Introduzca el numero de puerta:");
-                    numero = entradaUsuario.nextInt();
+                    numero = ControlDeEntradas.entradaoEnteroPositivo();
                     p.setNumero(numero);
                     break;
                 case 4:
                     System.out.println("Introduzca el numero de piso:");
-                    piso = entradaUsuario.nextInt();
+                    piso = ControlDeEntradas.entradaoEnteroPositivo();
                     p.setPiso(piso);
                     break;
                 case 5:
                     System.out.println("Introduzca el nombre del propietario:");
-                    propietario = entradaUsuario.nextLine();
+                    propietario = ControlDeEntradas.entradaString();
                     p.setPropietario(propietario);
                     break;
                 case 6:
-                    System.out.println("Introduzca el año de la fecha en que inicia el cedido:");
-                    anio = entradaUsuario.nextInt();
-                    System.out.println("Introduzca el numero del mes:");
-                    mes = entradaUsuario.nextInt();
-                    System.out.println("Introduzca el numero de dia:");
-                    dia = entradaUsuario.nextInt();
-                    inicioCedido = LocalDate.of(anio, mes, dia);
+                    System.out.println("Introduzca la fecha en que inicia el cedido:");
+                    inicioCedido = ControlDeEntradas.entradaFecha();
                     p.setInicioCedido(inicioCedido);
                     break;
                 case 7:
-                    System.out.println("Introduzca el año del fin del cedido:");
-                    anio = entradaUsuario.nextInt();
-                    System.out.println("Ahora, introduzca el numero del mes:");
-                    mes = entradaUsuario.nextInt();
-                    System.out.println("Introduzca el numero del dia:");
-                    dia = entradaUsuario.nextInt();
-                    finalCedido = LocalDate.of(anio, mes, dia);
+                    System.out.println("Introduzca la fecha del fin del cedido:");
+                    finalCedido = ControlDeEntradas.entradaFecha();
                     p.setFinalCedido(finalCedido);
                     break;
                 case 8:
                     System.out.println("Introduzca los metros cuadrados:");
-                    metrosCuadrados = entradaUsuario.nextFloat();
+                    metrosCuadrados = ControlDeEntradas.entradaFlotantePositivo();
                     p.setMetrosCuadrados(metrosCuadrados);
                     break;
                 case 9:
                     System.out.println("Introduzca el numero de camas: ");
-                    numeroCamas = entradaUsuario.nextInt();
+                    numeroCamas = ControlDeEntradas.entradaoEnteroPositivo();
                     p.setNumeroCamas(numeroCamas);
                     break;
                 case 10:
-                    System.out.println("Marque 1 si en la puerta hay baño propio, 0 si no lo hay:");
-                    if(entradaUsuario.nextInt() == 1){
-                        bano = true;
-                    }else{
-                        bano = false;
-                    }
+                    System.out.println("Dispone de baño?:");
+                    bano = ControlDeEntradas.entradaBoolean();
                     p.setBano(bano);
                     break;
                 case 11:
-                    System.out.println("Marque un 1 si hay comedor, 0 si no lo hay:");
-                    if(entradaUsuario.nextInt() == 1){
-                        comedor = true;
-                    }else{
-                        comedor = false;
-                    }
+                    System.out.println("Dispone de comedor:");
+                    comedor = ControlDeEntradas.entradaBoolean();
                     p.setComedor(comedor);
                     break;
                 case 12:
                     System.out.println("Introduzca un 1 si hay servicio de comida, un 0 si no lo hay:");
-                    if(entradaUsuario.nextInt() == 1){
-                        servicioComida = true;
-                    }else{
-                        servicioComida = false;
-                    }
+                    servicioComida = ControlDeEntradas.entradaBoolean();
                     p.setServicioComida(servicioComida);
                     break;
                 case 13:
-                    System.out.println("Introduzca un 1 si hay internet, 0 de lo contrario:");
-                    if(entradaUsuario.nextInt() == 1){
-                        internet = true;
-                    }else{
-                        internet = false;
-                    }
+                    System.out.println("Dispone de servicio de internet?:");
+                    internet = ControlDeEntradas.entradaBoolean();
                     p.setInternet(internet);
                     break;
                 case 14:
                     System.out.println("Si es exterior, introduzca 1, de lo contrario, un 0:");
-                    if(entradaUsuario.nextInt() == 1){
-                        exterior = true;
-                    }else{
-                        exterior = false;
-                    }
+                    exterior = ControlDeEntradas.entradaBoolean();
                     p.setExterior(exterior);
                     break;
                 case 15:
                     System.out.println("Introduzca un 1 si es planta baja, de lo contrario un 0:");
-                    if(entradaUsuario.nextInt() == 1){
-                        plantaBaja = true;
-                    }else{
-                        plantaBaja = false;
-                    }
+                    plantaBaja = ControlDeEntradas.entradaBoolean();
                     p.setPlantaBaja(plantaBaja);
                     break;
                 default:
@@ -340,8 +267,7 @@ public class Menu {
             System.out.println("Planta baja: " + p.getPlantaBaja());
 
             System.out.println("\n\nSon correctos estos datos?");
-            System.out.println("Si: introduzca un 1, No: introduzca un 0:");
-            respuesta = entradaUsuario.nextInt();
+            respuesta = ControlDeEntradas.entradaBoolean();
         }
 
         entradaUsuario.close();
