@@ -12,7 +12,7 @@ public class ControlDeEntradas {
         do{
             n = entradaUsuario.nextInt();
         }while(n < 0);
-        entradaUsuario.close();
+        //entradaUsuario.close();
         return n;
     }
 
@@ -22,17 +22,18 @@ public class ControlDeEntradas {
         do{
             n = entradaUsuario.nextFloat();
         }while(n < 0);
-        entradaUsuario.close();
+        //entradaUsuario.close();
         return n;
     }
 
     public static String entradaString(){
-        String s;
-        Scanner entradaUsuario = new Scanner(System.in);
+
+        String s = null;
+        Scanner entradaUsuario = new Scanner(System.in).useDelimiter("\\s*\n\\s*");
         do{
-            s = entradaUsuario.nextLine();
+            s = entradaUsuario.next();
         }while(s.length() <= 0);
-        entradaUsuario.close();
+        //entradaUsuario.close();
         return s;
     }
 
@@ -52,7 +53,7 @@ public class ControlDeEntradas {
             }
         }while(!b2);
 
-        entradaUsuario.close();
+        //entradaUsuario.close();
 
         return b;
     }
@@ -78,10 +79,24 @@ public class ControlDeEntradas {
         do{
             System.out.println("Introduzca el dia:");
             dia = entradaUsuario.nextInt();
-        }while ((dia < 0)|| (dia > 31) || (mes == 4 && mes == 6 && mes == 9 && mes == 11) && (dia > 30) || (mes == 2) && (dia > 29));
 
-        date = LocalDate.of(anio, mes, dia);
+        }while ((dia < 0)|| (dia > 31) || (mes == 4 && mes == 6 && mes == 9 && mes == 11) && (dia > 30) || (mes == 2) && (dia > 29));
+        try{
+            date = LocalDate.of(anio, mes, dia);
+        }catch (DateTimeException e){
+            System.out.println("Dia incorrecto para el mes!");
+        }
 
         return date;
+    }
+
+    public static int entradaOpcion(int nMax){
+        int n;
+        Scanner entradaUsuario = new Scanner(System.in);
+        do{
+            n = entradaUsuario.nextInt();
+        }while((n < 1) && (n > nMax));
+        //entradaUsuario.close();
+        return n;
     }
 }

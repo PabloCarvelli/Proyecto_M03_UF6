@@ -14,9 +14,8 @@ public class Menu {
     public void menuOpcionesPuertas(){
 
         boolean respuesta = true;
-        int opcion;
 
-        while(respuesta){
+        do{
 
             Scanner entradaUsuario = new Scanner(System.in);
 
@@ -28,22 +27,18 @@ public class Menu {
             System.out.println("6. Salir.");
 
             System.out.println("Introduzca el numero de su opcion.");
-            opcion = entradaUsuario.nextInt();
 
-            switch (opcion){
+            switch (ControlDeEntradas.entradaOpcion(6)){
                 case 1:
                     Puerta p = insertarPuerta();
                     AdministracionGeneral adG = new AdministracionGeneral();
-                    System.out.flush();
                     System.out.println("Quiere guardar esta puerta en la base de datos?");
-                    System.out.println("1. Si, 2. No:");
-                    if(entradaUsuario.nextInt() == 1){
+                    if(ControlDeEntradas.entradaBoolean()){
                         //adG.puertaInToBD(p);
                         System.out.println("Se ha guardado!");
                     }else{
                         System.out.println("No se ha guardado!");
                     }
-                    adG.puertaInToBD(p);
                     break;
 
                 case 2:
@@ -65,9 +60,11 @@ public class Menu {
                 case 6:
                     respuesta = false; // salir del menu.
                     break;
-
+                default:
+                    System.out.println("Opcion incorrecta!");
+                    break;
             }
-        }
+        }while(respuesta);
 
 
     }
@@ -89,8 +86,6 @@ public class Menu {
         boolean exterior;
         boolean plantaBaja;
         boolean ocupado;
-
-        Scanner entradaUsuario = new Scanner(System.in);
 
         System.out.println("Introduzca el codigo de puerta: ");
         codigo = ControlDeEntradas.entradaString();
@@ -164,12 +159,9 @@ public class Menu {
             System.out.println("14. Exterior.");
             System.out.println("15. Planta baja.");
 
-            int opc;
-
             System.out.println("Introduzca el numero de su opcion:");
-            opc = entradaUsuario.nextInt();
 
-            switch (opc){
+            switch (ControlDeEntradas.entradaOpcion(15)){
                 case 1:
                     System.out.println("Introduzca el codigo de puerta: ");
                     codigo = ControlDeEntradas.entradaString();
@@ -270,15 +262,12 @@ public class Menu {
             respuesta = ControlDeEntradas.entradaBoolean();
         }
 
-        entradaUsuario.close();
         return p;
     }
 
     public void modificarPuerta(Puerta p){
 
-        Scanner entradaUsuario = new Scanner(System.in);
         boolean respuesta;
-        int opc;
 
         do{
             System.out.println("Que datos quiere modificar?");
@@ -298,9 +287,8 @@ public class Menu {
             System.out.println("14. Exterior:" + p.getExterior());
             System.out.println("15. Planta baja:" + p.getPlantaBaja());
             System.out.println("\nMarque el numero de su opcion y presione Enter.");
-            opc = entradaUsuario.nextInt();
 
-            switch (opc){
+            switch (ControlDeEntradas.entradaOpcion(15)){
                 case 1:
                     System.out.println("Ingrese el codigo de la puerta:");
                     p.setCodigo(ControlDeEntradas.entradaString());
@@ -363,6 +351,9 @@ public class Menu {
                     System.out.println("Marque 1 para Si, 2 para No");
                     p.setPlantaBaja(ControlDeEntradas.entradaBoolean());
                     break;
+                default:
+                    System.out.println("Opcion incorrecta!");
+                    break;
             }
 
             System.out.println("Revise estos datos:");
@@ -397,8 +388,6 @@ public class Menu {
         String direccionTrabajo;
         boolean aceptado;
 
-        Scanner entradaUsuario = new Scanner(System.in);
-
         System.out.println("Introduzca el DNI:");
         dni = ControlDeEntradas.entradaString();
         System.out.println("Introduzca el nombre:");
@@ -431,9 +420,8 @@ public class Menu {
         System.out.println("Situacion de aceptado: " + s.getAceptado());
 
         System.out.println("Son correctos los datos introducidos?");
-        respuesta = ControlDeEntradas.entradaBoolean();
 
-        while(respuesta){
+        while(ControlDeEntradas.entradaBoolean()){
             System.out.println("Que datos quiere corregir:");
             System.out.println("1. DNI.");
             System.out.println("2. Nombre.");
@@ -446,9 +434,7 @@ public class Menu {
             System.out.println("Introduzca el numero de su opcion.");
             System.out.println("En caso de ser varios, no se preocupe, se le volvera a preguntar, \nhagalos uno a uno:");
 
-            int opc = entradaUsuario.nextInt();
-
-            switch (opc){
+            switch (ControlDeEntradas.entradaOpcion(8)){
                 case 1:
                     System.out.println("Introduzca el DNI:");
                     s.setDni(ControlDeEntradas.entradaString());
@@ -481,6 +467,9 @@ public class Menu {
                     System.out.println("Este sanitario ha sido comprobado?");
                     s.setAceptado(ControlDeEntradas.entradaBoolean());
                     break;
+                default:
+                    System.out.println("Opcion incorrcta!");
+                    break;
             }
 
             System.out.println("Revise estos datos:");
@@ -495,8 +484,8 @@ public class Menu {
             System.out.println("Situacion de aceptado: " + s.getAceptado());
 
             System.out.println("Son correctos los datos introducidos?");
-            respuesta = ControlDeEntradas.entradaBoolean();
-            
+            //respuesta = ControlDeEntradas.entradaBoolean();
+
         }
         return s;
     }
@@ -508,22 +497,21 @@ public class Menu {
         String apellido1;
         String apellido2;
         int edad;
-
-        Scanner entradaUsuario = new Scanner(System.in);
+        Boolean respuesta;
 
         System.out.println("Introduzca el DNI:");
-        dni = entradaUsuario.nextLine();
+        dni = ControlDeEntradas.entradaString();
         System.out.println("Introduzca el nombre:");
-        nombre = entradaUsuario.nextLine();
+        nombre = ControlDeEntradas.entradaString();
         System.out.println("Itroduzca el primer apellido:");
-        apellido1 = entradaUsuario.nextLine();
+        apellido1 = ControlDeEntradas.entradaString();
         System.out.println("Introduzca el Segundo apellido:");
-        apellido2 = entradaUsuario.nextLine();
+        apellido2 = ControlDeEntradas.entradaString();
         System.out.println("Introduzca la edad:");
-        edad = entradaUsuario.nextInt();
-
+        edad = ControlDeEntradas.entradaoEnteroPositivo();
 
         Trabajador t = new Trabajador(dni, nombre, apellido1, apellido2, edad);
+
         System.out.println("Revise estos datos:");
         System.out.println("\nDNI: " + t.getDni());
         System.out.println("Nombre: " + t.getNombre());
@@ -532,19 +520,10 @@ public class Menu {
         System.out.println("Edad: " + t.getEdad());
 
         System.out.println("Son estos datos correctos?");
-        System.out.println("1. Si, 2. No.");
-        System.out.println("Introduzca el numero de su opcion para indicar su respuesta:");
 
-        int resp = entradaUsuario.nextInt();
-        boolean respuesta;
+        respuesta = ControlDeEntradas.entradaBoolean();
 
-        if(resp == 1){
-            respuesta = false;
-        }else{
-            respuesta = true;
-        }
-
-        while(respuesta){
+        while(!respuesta){
             System.out.println("Que datos quiere corregir?");
             System.out.println("\n1. DNI.");
             System.out.println("2. Nombre.");
@@ -552,32 +531,32 @@ public class Menu {
             System.out.println("4. Segundo apelldo.");
             System.out.println("5. Edad.");
 
-            int opc = entradaUsuario.nextInt();
+            // int opc = ControlDeEntradas.entradaOpcion(5);
 
-            switch (opc){
+            switch (ControlDeEntradas.entradaOpcion(5)){
                 case 1:
                     System.out.println("Introduzca el DNI:");
-                    dni = entradaUsuario.nextLine();
+                    dni = ControlDeEntradas.entradaString();
                     t.setDni(dni);
                     break;
                 case 2:
                     System.out.println("Introduzca el nombre:");
-                    nombre = entradaUsuario.nextLine();
+                    nombre = ControlDeEntradas.entradaString();
                     t.setNombre(nombre);
                     break;
                 case 3:
                     System.out.println("Introduzca el primer apellido:");
-                    apellido1 = entradaUsuario.nextLine();
+                    apellido1 = ControlDeEntradas.entradaString();
                     t.setApellido1(apellido1);
                     break;
                 case 4:
                     System.out.println("Introduzca el segundo apellido:");
-                    apellido2 = entradaUsuario.nextLine();
+                    apellido2 = ControlDeEntradas.entradaString();
                     t.setApellido2(apellido2);
                     break;
                 case 5:
                     System.out.println("Introduzca la edad:");
-                    edad = entradaUsuario.nextInt();
+                    edad = ControlDeEntradas.entradaoEnteroPositivo();
                     t.setEdad(edad);
                     break;
                 default:
@@ -591,13 +570,7 @@ public class Menu {
             System.out.println("Segundo apellido: " + t.getApellido2());
             System.out.println("Edad: " + t.getEdad());
             System.out.println("Son estos datos correctos?");
-            System.out.println("1. Si, 2. No.");
-            System.out.println("Intoduzca el numero de su opcion para indicar su respuesta:");
-            if(resp == 1){
-                respuesta = false;
-            }else{
-                respuesta = true;
-            }
+            respuesta = ControlDeEntradas.entradaBoolean();
         }
         return t;
     }
