@@ -16,9 +16,6 @@ public class Menu {
         boolean respuesta = true;
 
         do{
-
-            Scanner entradaUsuario = new Scanner(System.in);
-
             System.out.println("1. Dar de alta un numero de Puerta.");
             System.out.println("2. Modificar la informacion de una Puerta.");
             System.out.println("3. Eliminar un numero de Puerta.");
@@ -239,6 +236,7 @@ public class Menu {
                     break;
                 default:
                     System.out.println("Opcion incorrecta.");
+                    break;
             }
 
             System.out.println("Verifique que los datos esten correctos.");

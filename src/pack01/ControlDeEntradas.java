@@ -29,7 +29,7 @@ public class ControlDeEntradas {
     public static String entradaString(){
 
         String s = null;
-        Scanner entradaUsuario = new Scanner(System.in).useDelimiter("\\s*\n\\s*");
+        Scanner entradaUsuario = new Scanner(System.in);//Scanner(System.in).useDelimiter("\\s*\n\\s*");
         do{
             s = entradaUsuario.next();
         }while(s.length() <= 0);
@@ -80,12 +80,9 @@ public class ControlDeEntradas {
             System.out.println("Introduzca el dia:");
             dia = entradaUsuario.nextInt();
 
-        }while ((dia < 0)|| (dia > 31) || (mes == 4 && mes == 6 && mes == 9 && mes == 11) && (dia > 30) || (mes == 2) && (dia > 29));
-        try{
-            date = LocalDate.of(anio, mes, dia);
-        }catch (DateTimeException e){
-            System.out.println("Dia incorrecto para el mes!");
-        }
+        }while ((dia < 0)|| (dia > 31) || (mes == 4 || mes == 6 || mes == 9 || mes == 11) && (dia > 30) || (mes == 2) && (dia > 29));
+
+        date = LocalDate.of(anio, mes, dia);
 
         return date;
     }
