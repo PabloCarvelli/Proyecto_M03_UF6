@@ -10,7 +10,12 @@ public class ControlDeEntradas {
         int n;
         Scanner entradaUsuario = new Scanner(System.in);
         do{
-            n = entradaUsuario.nextInt();
+            try{
+                n = entradaUsuario.nextInt();
+            }catch (InputMismatchException e){
+                System.out.println("Error al introducir el numero");
+                n = -1;
+            }
         }while(n < 0);
         //entradaUsuario.close();
         return n;
@@ -70,16 +75,35 @@ public class ControlDeEntradas {
 
         do{
             System.out.println("Introduzca el año: ");
-            anio = entradaUsuario.nextInt();
+            try{
+                anio = entradaUsuario.nextInt();
+            }catch (InputMismatchException e){
+                System.out.println("Error al introducir el numero.");
+                System.out.println("Recuerde que deben ser enteros positivos, no caracteres.");
+                anio = -1;
+            }
+
         }while(anio < 0);
         do{
             System.out.println("Introduzca el mes: ");
-            mes = entradaUsuario.nextInt();
+            try{
+                mes = entradaUsuario.nextInt();
+            }catch (InputMismatchException e){
+                System.out.println("Error al introducir el numero.");
+                System.out.println("Recuerde que deben ser enteros positivos, no caracteres.");
+                mes = -1;
+            }
+
         }while(mes < 0 || mes > 12);
         do{
             System.out.println("Introduzca el dia:");
-            dia = entradaUsuario.nextInt();
-
+            try{
+                dia = entradaUsuario.nextInt();
+            }catch (InputMismatchException e){
+                System.out.println("Error al introducir el numero.");
+                System.out.println("Recuerde que deben ser enteros positivos, no caracteres.");
+                dia = -1;
+            }
         }while ((dia < 0)|| (dia > 31) || (mes == 4 || mes == 6 || mes == 9 || mes == 11) && (dia > 30) || (mes == 2) && (dia > 29));
 
         date = LocalDate.of(anio, mes, dia);
@@ -91,7 +115,13 @@ public class ControlDeEntradas {
         int n;
         Scanner entradaUsuario = new Scanner(System.in);
         do{
-            n = entradaUsuario.nextInt();
+            try{
+                n = entradaUsuario.nextInt();
+            }catch (InputMismatchException e){
+                System.out.println("Error al introducir el numero.");
+                System.out.println("Recuerde que deben ser enteros positivos, no caracteres.");
+                n = -1;
+            }
         }while((n < 1) && (n > nMax));
         //entradaUsuario.close();
         return n;
