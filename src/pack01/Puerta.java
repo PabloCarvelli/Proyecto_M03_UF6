@@ -22,6 +22,10 @@ public class Puerta {
     private boolean plantaBaja;
     private boolean ocupado;
 
+    public Puerta (){
+
+    }
+
     public Puerta(String codigo, String direccion, int numero, int piso, String propietario, LocalDate inicioCedido, LocalDate finalCedido, float metrosCuadrados, int numeroCamas, boolean bano, boolean comedor, boolean servicioComida, boolean internet, boolean exterior, boolean plantaBaja, boolean ocupado) {
 
         this.codigo = codigo;
