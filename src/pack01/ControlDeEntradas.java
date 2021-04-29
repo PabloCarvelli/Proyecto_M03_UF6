@@ -34,7 +34,7 @@ public class ControlDeEntradas {
     public static String entradaString(){
 
         String s = null;
-        Scanner entradaUsuario = new Scanner(System.in);//Scanner(System.in).useDelimiter("\\s*\n\\s*");
+        Scanner entradaUsuario = new Scanner(System.in).useDelimiter("\\s*\n\\s*");
         do{
             s = entradaUsuario.next();
         }while(s.length() <= 0);

@@ -9,9 +9,9 @@ import java.time.LocalDate;
 
 public class AdministracionGeneral {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/BDBiblio";
+    private static final String URL = "jdbc:mysql://localhost:3306/DBGestion";
     private static final String USER = "root";
-    private static final String PASSWORD = "18060702pablo";
+    private static final String PASSWORD = ""; // colocar la contraseña aqui!
 
     private Connection conexion;
     private Statement sentencia;
@@ -27,7 +27,7 @@ public class AdministracionGeneral {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
             Statement sentencia = conexion.createStatement();
-            ResultSet resul = sentencia.executeQuery("SELECT * FROM puertas");
+            ResultSet resul = sentencia.executeQuery("SELECT * FROM Puerta");
 
             while(resul.next()){
                 System.out.println("Codigo: "+resul.getString("codigo"));
@@ -63,7 +63,7 @@ public class AdministracionGeneral {
 
     public Puerta recuperarPuerta(String codigo){
 
-        String consultaSQL = "SELECT * FROM puertas WHERE codigo = \"" + codigo + "\"";
+        String consultaSQL = "SELECT * FROM Puerta WHERE codigo = \"" + codigo + "\"";
         Puerta p = new Puerta();
 
         try{
@@ -110,7 +110,7 @@ public class AdministracionGeneral {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             conexion = DriverManager.getConnection(URL,USER,PASSWORD);
-            sentencia2 = conexion.prepareStatement("INSERT INTO Socios VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            sentencia2 = conexion.prepareStatement("INSERT INTO Puerta VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
             sentencia2.setString(1, p.getCodigo());
             sentencia2.setString(2, p.getDireccion());

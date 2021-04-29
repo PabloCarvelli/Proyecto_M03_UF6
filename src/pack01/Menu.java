@@ -14,6 +14,8 @@ public class Menu {
     public void menuOpcionesPuertas(){
 
         boolean respuesta = true;
+        AdministracionGeneral adG = new AdministracionGeneral();
+        Puerta p;
 
         do{
             System.out.println("1. Dar de alta un numero de Puerta.");
@@ -27,11 +29,10 @@ public class Menu {
 
             switch (ControlDeEntradas.entradaOpcion(6)){
                 case 1:
-                    Puerta p = insertarPuerta();
-                    AdministracionGeneral adG = new AdministracionGeneral();
+                    p = insertarPuerta();
                     System.out.println("Quiere guardar esta puerta en la base de datos?");
                     if(ControlDeEntradas.entradaBoolean()){
-                        //adG.puertaInToBD(p);
+                        adG.puertaInToBD(p);
                         System.out.println("Se ha guardado!");
                     }else{
                         System.out.println("No se ha guardado!");
@@ -48,10 +49,14 @@ public class Menu {
 
                 case 4:
                     // menu listado de espacios.
+                    adG.mostrarTodasLasPuertas();
                     break;
 
                 case 5:
                     // menu busqueda de espacios.
+                    System.out.println("Introduzca el codigo de la puerta que desea buscar:");
+                    p = adG.recuperarPuerta(ControlDeEntradas.entradaString());
+                    MostrarObjetoPantalla.muestraPuerta(p);
                     break;
 
                 case 6:
@@ -108,7 +113,7 @@ public class Menu {
         comedor = ControlDeEntradas.entradaBoolean();
         System.out.println("Dispone de servicio de comida?:");
         servicioComida = ControlDeEntradas.entradaBoolean();
-        System.out.println("Introduzca un 1 si hay internet, 0 de lo contrario:");
+        System.out.println("Dispone de servicio de internet?:");
         internet = ControlDeEntradas.entradaBoolean();
         System.out.println("Si es exterior, introduzca 1, de lo contrario, un 0:");
         exterior = ControlDeEntradas.entradaBoolean();
