@@ -11,9 +11,10 @@ public class Menu {
 
     }
 
-    public static void menuOpcionesSanitario(){
+    public void menuOpcionesSanitario(){
 
         boolean respuesta = true;
+        Sanitario s;
         AdministracionGeneral adG = new AdministracionGeneral();
         do{
             System.out.println("1. Dar de alta a un sanitario.");
@@ -28,6 +29,8 @@ public class Menu {
             switch (ControlDeEntradas.entradaOpcion(6)){
                 case 1:
                     // dar de alta sanitario.
+                    s = insertarSanitario();
+                    System.out.println("Quiere guardar este sanitario en la base de datos?");
                     break;
                 case 2:
                     // Modificar info sanitario
