@@ -19,4 +19,23 @@ public class MostrarObjetoPantalla {
         System.out.println("Exterior: " + p.getExterior());
         System.out.println("Planta baja: " + p.getPlantaBaja());
     }
+
+    public static void muestraSanitario(Sanitario s){
+        System.out.println("DNI: " + s.getDni());
+        System.out.println("Nombre: " + s.getNombre());
+        System.out.println("Primer apellido: " + s.getApellido1());
+        System.out.println("Segundo apellido: " + s.getApellido2());
+        System.out.println("Edad: " + s.getEdad());
+        System.out.println("Titulacion: " + s.getTitulacion());
+        System.out.println("Direccion de trabajo: " + s.getDireccionTrabajo());
+        System.out.println("Situacion de aceptado: " + s.getAceptado());
+    }
+
+    public static void muestraTrabajador(Trabajador t){
+        System.out.println("\nDNI: " + t.getDni());
+        System.out.println("Nombre: " + t.getNombre());
+        System.out.println("Primer apellido: " + t.getApellido1());
+        System.out.println("Segundo apellido: " + t.getApellido2());
+        System.out.println("Edad: " + t.getEdad());
+    }
 }

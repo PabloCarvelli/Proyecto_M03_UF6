@@ -11,6 +11,43 @@ public class Menu {
 
     }
 
+    public static void menuOpcionesSanitario(){
+
+        boolean respuesta = true;
+        AdministracionGeneral adG = new AdministracionGeneral();
+        do{
+            System.out.println("1. Dar de alta a un sanitario.");
+            System.out.println("2. Modificar la informacion de un sanitario.");
+            System.out.println("3. Eliminar a un sanitario.");
+            System.out.println("4. Ver listado de sanitarios.");
+            System.out.println("5. Buscar un sanitario por su DNI.");
+            System.out.println("6. Salir.");
+
+            System.out.println("\nIntroduzca el numero de su opcion:");
+
+            switch (ControlDeEntradas.entradaOpcion(6)){
+                case 1:
+                    // dar de alta sanitario.
+                    break;
+                case 2:
+                    // Modificar info sanitario
+                case 3:
+                    //Eliminar sanitario.
+                    break;
+                case 4:
+                    // Listado sanitarios.
+                    break;
+                case 5:
+                    // Buscar sanitario por DNI.
+                    break;
+                case 6:
+                    // Salir.
+                    respuesta = false;
+                    break;
+            }
+        }while(respuesta);
+    }
+
     public void menuOpcionesPuertas(){
 
         boolean respuesta = true;
@@ -145,7 +182,7 @@ public class Menu {
         boolean respuesta = ControlDeEntradas.entradaBoolean();
 
         while(!respuesta){
-            System.out.println("Que doato desea corregir?");
+            System.out.println("Que dato desea corregir?");
             System.out.println("1. Codigo.");
             System.out.println("2. Direccion.");
             System.out.println("3. Numero.");
