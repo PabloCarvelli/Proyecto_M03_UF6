@@ -9,6 +9,10 @@ public class Sanitario extends Persona{
     private String direccionTrabajo;
     private boolean aceptado;
 
+    public Sanitario(){
+
+    }
+
     public Sanitario(String dni, String nombre, String apellido1, String apellido2, int edad, String titulacion, String direccionTrabajo, boolean aceptado) {
         super(dni, nombre, apellido1, apellido2, edad);
         this.titulacion = titulacion;

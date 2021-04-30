@@ -31,6 +31,13 @@ public class Menu {
                     // dar de alta sanitario.
                     s = insertarSanitario();
                     System.out.println("Quiere guardar este sanitario en la base de datos?");
+                    if(ControlDeEntradas.entradaBoolean()){
+                        adG.sanitarioInToBD(s);
+                        System.out.println("Ha sido guardado el sanitario.");
+                    }else{
+                        System.out.println("No ha sido guardado el sanitario.");
+                    }
+
                     break;
                 case 2:
                     // Modificar info sanitario
@@ -39,6 +46,7 @@ public class Menu {
                     break;
                 case 4:
                     // Listado sanitarios.
+                    adG.mostrarTodosLosSanitarios();
                     break;
                 case 5:
                     // Buscar sanitario por DNI.
@@ -464,7 +472,7 @@ public class Menu {
 
         System.out.println("Son correctos los datos introducidos?");
 
-        while(ControlDeEntradas.entradaBoolean()){
+        while(!ControlDeEntradas.entradaBoolean()){
             System.out.println("Que datos quiere corregir:");
             System.out.println("1. DNI.");
             System.out.println("2. Nombre.");

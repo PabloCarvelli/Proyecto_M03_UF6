@@ -9,9 +9,9 @@ import java.time.LocalDate;
 
 public class AdministracionGeneral {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/DBGestion";
+    private static final String URL = "jdbc:mysql://localhost:3306/BDGestion";
     private static final String USER = "root";
-    private static final String PASSWORD = ""; // colocar la contraseña aqui!
+    private static final String PASSWORD = "18060702pablo"; // colocar la contraseña aqui!
 
     private Connection conexion;
     private Statement sentencia;
@@ -144,21 +144,10 @@ public class AdministracionGeneral {
 
     public void sanitarioInToBD(Sanitario s){
 
-        String dni;
-        String nombre;
-        String apellido1;
-        String apellido2;
-        int edad;
-        String titulacion;
-        String direccionTrabajo;
-        int tiempoEstimadoNoches;
-        LocalDate fechaIn;
-        LocalDate fechaOut;
-
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/BDBiblio","root","18060702pablo");
-            sentencia2 = conexion.prepareStatement("INSERT INTO Socios VALUES (?,?,?,?,?)");
+            conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+            sentencia2 = conexion.prepareStatement("INSERT INTO Sanitario VALUES (?,?,?,?,?,?,?,?)");
 
             sentencia2.setString(1, s.getDni());
             sentencia2.setString(2, s.getNombre());
@@ -167,6 +156,7 @@ public class AdministracionGeneral {
             sentencia2.setInt(5, s.getEdad());
             sentencia2.setString(6, s.getTitulacion());
             sentencia2.setString(7, s.getDireccionTrabajo());
+            sentencia2.setBoolean(8, s.getAceptado());
 
             sentencia2.executeUpdate();
 
@@ -178,5 +168,72 @@ public class AdministracionGeneral {
         } catch(SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void mostrarTodosLosSanitarios(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+            Statement sentencia = conexion.createStatement();
+            ResultSet resul = sentencia.executeQuery("SELECT * FROM Sanitario");
+
+            while(resul.next()){
+                System.out.println("DNI: "+resul.getString("dni"));
+                System.out.println("Nombre: "+resul.getString("nombre"));
+                System.out.println("Numero: "+resul.getString("apellido1"));
+                System.out.println("Primer apellido: "+resul.getString("apellido2"));
+                System.out.println("Segundo apellido: "+resul.getInt("edad"));
+                System.out.println("Titulacion: "+resul.getString("titulacion"));
+                System.out.println("Direccion de trabajo: "+resul.getString("direccionTrabajo"));
+                System.out.println("Situacion de aceptado: "+resul.getBoolean("aceptado"));
+                System.out.println("-----------------------------------------------\n");
+            }//fin del while
+            //cerramos resulSet
+            resul.close();
+            //cerramos Statement
+            sentencia.close();
+            //cerramos conexión
+            conexion.close();
+        } catch  (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public Sanitario recuperarSanitario(String dni){
+
+        String consultaSQL = "SELECT * FROM Puerta WHERE codigo = \"" + dni + "\"";
+        Sanitario s = new Sanitario();
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+            Statement sentencia = conexion.createStatement();
+            ResultSet resul = sentencia.executeQuery(consultaSQL);
+
+            while(resul.next()){
+                s.setDni(resul.getString("dni"));
+                s.setNombre(resul.getString("nombre"));
+                s.setApellido1(resul.getString("apellido1"));
+                s.setApellido2(resul.getString("apellido2"));
+                s.setEdad(resul.getInt("edad"));
+                s.setTitulacion(resul.getString("titulacion"));
+                s.setDireccionTrabajo(resul.getString("direccionTrabajo"));
+                s.setAceptado(resul.getBoolean("aceptado"));
+                System.out.println("-----------------------------------------------\n");
+            }//fin del while
+            //cerramos resulSet
+            resul.close();
+            //cerramos Statement
+            sentencia.close();
+            //cerramos conexión
+            conexion.close();
+        } catch  (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return s;
     }
 }
