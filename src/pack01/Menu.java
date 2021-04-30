@@ -50,6 +50,8 @@ public class Menu {
                     break;
                 case 5:
                     // Buscar sanitario por DNI.
+                    System.out.println("Introduzca el DNI del sanitario que desea buscar:");
+                    MostrarObjetoPantalla.muestraSanitario(adG.recuperarSanitario(ControlDeEntradas.entradaString()));
                     break;
                 case 6:
                     // Salir.
