@@ -142,6 +142,26 @@ public class AdministracionGeneral {
 
     }
 
+    public void borrarSanitarioBD(String dni){
+        String consultaSQL = "DELETE FROM sanitario WHERE dni = ?";
+
+        try{
+            System.out.println(consultaSQL);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+            sentencia2 = conexion.prepareStatement(consultaSQL);
+            sentencia2.setString(1, dni);
+            sentencia2.executeUpdate();
+
+            sentencia2.close();
+            conexion.close();
+        } catch  (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public void sanitarioInToBD(Sanitario s){
 
         try{

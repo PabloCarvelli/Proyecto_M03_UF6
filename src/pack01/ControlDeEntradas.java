@@ -43,23 +43,18 @@ public class ControlDeEntradas {
     }
 
     public static boolean entradaBoolean(){
-        boolean b = false;
-        boolean b2;
         Scanner entradaUsuario = new Scanner(System.in);
+        String s;
+        boolean b = true;
         do{
-            System.out.println("Escriba true para SI.");
-            System.out.println("Escriba false para NO.");
-            try{
-                b = entradaUsuario.nextBoolean();
-                b2 = true;
-            }catch(InputMismatchException e){
-                System.out.println("Entrada invalida!");
-                b2 = false;
+            System.out.println("Introduzca \"Si\" o \"No\":");
+            s = entradaUsuario.nextLine();
+            if(s.equalsIgnoreCase("Si")){
+                b = true;
+            }else if(s.equalsIgnoreCase("No")){
+                b = false;
             }
-        }while(!b2);
-
-        //entradaUsuario.close();
-
+        }while(!s.equalsIgnoreCase("SI") && !s.equalsIgnoreCase("NO"));
         return b;
     }
 

@@ -43,6 +43,8 @@ public class Menu {
                     // Modificar info sanitario
                 case 3:
                     //Eliminar sanitario.
+                    System.out.println("Introduzca el DNI completo del sanitario que desea eliminar:");
+                    adG.borrarSanitarioBD(ControlDeEntradas.entradaString());
                     break;
                 case 4:
                     // Listado sanitarios.
