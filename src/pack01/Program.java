@@ -5,8 +5,9 @@ import java.time.LocalDate;
 public class Program {
 
     public static void main(String[] args) {
-        Menu m = new Menu();
-        m.menuOpcionesSanitario();
+        AdministracionGeneral adG = new AdministracionGeneral();
+        adG.modificacionPuerta("puta", "molona");
+
     }
 
 }

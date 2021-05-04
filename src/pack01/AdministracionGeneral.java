@@ -5,13 +5,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 
 public class AdministracionGeneral {
 
     private static final String URL = "jdbc:mysql://localhost:3306/BDGestion";
     private static final String USER = "root";
-    private static final String PASSWORD = ""; // colocar la contraseña aqui!
+    private static final String PASSWORD = "18060702pablo"; // colocar la contraseña aqui!
 
     private Connection conexion;
     private Statement sentencia;
@@ -20,6 +19,37 @@ public class AdministracionGeneral {
 
     public AdministracionGeneral(){
 
+    }
+
+    public Usuario recuperarUsuario(String nombreUsuario){
+
+        String consultaSQL = "SELECT * FROM Usuarios WHERE nombreUsuario = \"" + nombreUsuario + "\"";
+        Usuario u = new Usuario();
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+            Statement sentencia = conexion.createStatement();
+            ResultSet resul = sentencia.executeQuery(consultaSQL);
+
+            while(resul.next()){
+                u.setNombreUsuario(resul.getString("nombreUsuario"));
+                u.setPassword(resul.getString("contrasena"));
+
+                System.out.println("-----------------------------------------------\n");
+            }//fin del while
+            //cerramos resulSet
+            resul.close();
+            //cerramos Statement
+            sentencia.close();
+            //cerramos conexión
+            conexion.close();
+        } catch  (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return u;
     }
 
     public void mostrarTodasLasPuertas(){
@@ -139,6 +169,51 @@ public class AdministracionGeneral {
         } catch(SQLException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public void borrarPuertaBD(String codigo){
+
+        String consultaSQL = "DELETE FROM Puerta WHERE codigo = ?";
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+            sentencia2 = conexion.prepareStatement(consultaSQL);
+            sentencia2.setString(1, codigo);
+            sentencia2.executeUpdate();
+
+            sentencia2.close();
+            conexion.close();
+        } catch  (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void modificacionPuerta(String campo, String codigo){
+        String consultaSQL = "UPDATE Puerta SET " + campo + " ? WHERE " + codigo + " = ?";
+
+        try{
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+            sentencia2 = conexion.prepareStatement(consultaSQL);
+            sentencia2.setString(1, campo);
+            sentencia2.setString(2, codigo);
+
+            System.out.println(consultaSQL);
+            //sentencia2.executeUpdate();
+
+            sentencia2.close();
+            conexion.close();
+        } catch  (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+
 
     }
 

@@ -1,14 +1,31 @@
 package pack01;
 
-import java.awt.*;
-import java.awt.desktop.SystemSleepEvent;
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Menu {
 
     public Menu(){
 
+    }
+
+    public void menuGeneral(){
+        AdministracionGeneral adG = new AdministracionGeneral();
+        String nombreUsuario;
+        String password;
+        Usuario userBD;
+        System.out.println("Cap sanitari sense proteccio.");
+        System.out.println("Bienvenido al sistema de gestion de espacios para sanitarios,");
+        System.out.println("Por la emergencia del Covid-19.");
+        System.out.println("\nIntroduzca su nombre de usuario:");
+        nombreUsuario = ControlDeEntradas.entradaString();
+        password = ControlDeEntradas.entradaString();
+
+        Usuario userEntrante = new Usuario(nombreUsuario, password);
+        userBD = adG.recuperarUsuario(nombreUsuario);
+
+        if(userEntrante.getPassword() != userBD.getPassword()){
+            System.out.println("Contraseña incorrecta");
+        }
     }
 
     public void menuOpcionesSanitario(){
@@ -97,6 +114,8 @@ public class Menu {
 
                 case 3:
                     // menu Eliminacion;
+                    System.out.println("Introduzca el Codigo de la puerta que desee eliminar:");
+                    adG.borrarPuertaBD(ControlDeEntradas.entradaString());
                     break;
 
                 case 4:
