@@ -9,6 +9,44 @@ public class Menu {
     }
 
     public void menuGeneral(){
+
+        boolean seguir;
+
+        do{
+            System.out.println("\tMenu general:");
+            System.out.println("1. Opciones sobre puertas.");
+            System.out.println("2. Opciones sobre sanitarios.");
+            System.out.println("3. Opciones sobre trabajadores / voluntrios.");
+            System.out.println("4. Opciones Ocupaciones.");
+            System.out.println("5. Salir.");
+            System.out.println("\nIntroduzca el numero de su opcion:");
+
+            switch (ControlDeEntradas.entradaOpcion(5)){
+                case 1:
+                    menuOpcionesPuertas();
+                    seguir = true;
+                    break;
+                case 2:
+                    menuOpcionesSanitario();
+                    seguir = true;
+                    break;
+                case 3:
+                    seguir = true;
+                    break;
+                case 4:
+                    seguir = true;
+                    break;
+                case 5:
+                    seguir = false;
+                    break;
+                default:
+                    seguir = true;
+                    break;
+            }
+        }while(seguir);
+    }
+
+    public boolean menuEntrada(){
         AdministracionGeneral adG = new AdministracionGeneral();
         String nombreUsuario;
         String password;
@@ -18,6 +56,7 @@ public class Menu {
         System.out.println("Por la emergencia del Covid-19.");
         System.out.println("\nIntroduzca su nombre de usuario:");
         nombreUsuario = ControlDeEntradas.entradaString();
+        System.out.println("\nIntroduzca su contraseña:");
         password = ControlDeEntradas.entradaString();
 
         Usuario userEntrante = new Usuario(nombreUsuario, password);
@@ -25,6 +64,10 @@ public class Menu {
 
         if(userEntrante.getPassword() != userBD.getPassword()){
             System.out.println("Contraseña incorrecta");
+            return false;
+        }else{
+            System.out.println("Autorizacion validada.");
+            return true;
         }
     }
 
@@ -647,5 +690,43 @@ public class Menu {
             respuesta = ControlDeEntradas.entradaBoolean();
         }
         return t;
+    }
+
+    public void menuTrabajador(){
+        boolean seguir;
+        do{
+            System.out.println("Opciones para los trabajadores.");
+            System.out.println("1. Insertar un trabajador en el sistema.");
+            System.out.println("2. Modificar la infoermacion de un trabajador.");
+            System.out.println("3. Eliminar a un trabajador del sistema.");
+            System.out.println("4. Lista de trabajadores.");
+            System.out.println("5. Buscar un sanitario.");
+            System.out.println("6. Salir.");
+
+            switch (ControlDeEntradas.entradaOpcion(6)){
+                case 1:
+                    insertarTrabajador();
+                    seguir = true;
+                    break;
+                case 2:
+                    seguir = true;
+                    break;
+                case 3:
+                    seguir = true;
+                    break;
+                case 4:
+                    seguir = true;
+                    break;
+                case 5:
+                    seguir = true;
+                    break;
+                case 6:
+                    seguir = false;
+                    break;
+                default:
+                    seguir = true;
+                    break;
+            }
+        }while(!seguir);
     }
 }
