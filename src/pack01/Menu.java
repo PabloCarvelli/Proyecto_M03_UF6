@@ -31,6 +31,7 @@ public class Menu {
                     seguir = true;
                     break;
                 case 3:
+                    menuTrabajador();
                     seguir = true;
                     break;
                 case 4:
@@ -694,6 +695,8 @@ public class Menu {
 
     public void menuTrabajador(){
         boolean seguir;
+        AdministracionGeneral adG = new AdministracionGeneral();
+        Trabajador t;
         do{
             System.out.println("Opciones para los trabajadores.");
             System.out.println("1. Insertar un trabajador en el sistema.");
@@ -705,10 +708,18 @@ public class Menu {
 
             switch (ControlDeEntradas.entradaOpcion(6)){
                 case 1:
-                    insertarTrabajador();
+                    t = insertarTrabajador();
+                    System.out.println("Desea guardar la informacion del trabajador en la base de datos?");
+                    if(ControlDeEntradas.entradaBoolean()){
+                        adG.trabajadorInToDB(t);
+                    }else{
+                        System.out.println("No se han guardado los datos!");
+                    }
                     seguir = true;
                     break;
                 case 2:
+                    System.out.println("Modificar un trabajador.");
+                    System.out.println("Introdusca en DNI del trabajador:");
                     seguir = true;
                     break;
                 case 3:

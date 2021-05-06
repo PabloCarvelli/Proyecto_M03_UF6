@@ -192,8 +192,8 @@ public class AdministracionGeneral {
         }
     }
 
-    public void modificacionPuerta(String campo, String codigo){
-        String consultaSQL = "UPDATE Puerta SET " + campo + " ? WHERE " + codigo + " = ?";
+    public void modificacionPuerta(String columna, String campo, String codigo){
+        String consultaSQL = "UPDATE Puerta SET " + columna + " = " + campo +  " ? WHERE " + codigo + " = ?";
 
         try{
 
@@ -330,5 +330,104 @@ public class AdministracionGeneral {
             e.printStackTrace();
         }
         return s;
+    }
+
+    public void trabajadorInToDB(Trabajador t){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+            sentencia2 = conexion.prepareStatement("INSERT INTO Trabajador VALUES (?,?,?,?,?)");
+
+            sentencia2.setString(1, t.getDni());
+            sentencia2.setString(2, t.getNombre());
+            sentencia2.setString(3, t.getApellido1());
+            sentencia2.setString(4, t.getApellido2());
+            sentencia2.setInt(5, t.getEdad());
+
+            sentencia2.executeUpdate();
+
+            sentencia2.close();
+            conexion.close();
+        }
+        catch  (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void modificacionTrabajadorS(String columna, String dato, String dni){
+        String consultaSQL = "UPDATE Trabajador SET " + columna + " = " +"\"" +dato + "\""+ " WHERE dni = " + "\""+dni+"\"";
+
+        try{
+            System.out.println(consultaSQL);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+            Statement sentencia = conexion.createStatement();
+
+            System.out.println(consultaSQL);
+            sentencia.executeUpdate(consultaSQL);
+
+            sentencia.close();
+            conexion.close();
+        } catch  (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void modificacionTrabajadorI(String columna, String dato, String dni){
+        String consultaSQL = "UPDATE Trabajador SET " + columna + " = " + dato + " WHERE dni = " + "\""+dni+"\"";
+
+        try{
+            System.out.println(consultaSQL);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+            Statement sentencia = conexion.createStatement();
+
+            System.out.println(consultaSQL);
+            sentencia.executeUpdate(consultaSQL);
+
+            sentencia.close();
+            conexion.close();
+        } catch  (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public Trabajador recuperarTrabajador(String dni){
+
+        String consultaSQL = "SELECT * FROM Puerta WHERE codigo = \"" + dni + "\"";
+        Trabajador t = new Trabajador();
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+            Statement sentencia = conexion.createStatement();
+            ResultSet resul = sentencia.executeQuery(consultaSQL);
+
+            while(resul.next()){
+                t.setDni(resul.getString("dni"));
+                t.setNombre(resul.getString("nombre"));
+                t.setApellido1(resul.getString("apellido1"));
+                t.setApellido2(resul.getString("apellido2"));
+                t.setEdad(resul.getInt("edad"));
+                System.out.println("-----------------------------------------------\n");
+            }//fin del while
+            //cerramos resulSet
+            resul.close();
+            //cerramos Statement
+            sentencia.close();
+            //cerramos conexión
+            conexion.close();
+        } catch  (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return t;
     }
 }
