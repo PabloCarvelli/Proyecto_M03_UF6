@@ -17,17 +17,17 @@ public class Ocupacion {
         this.fechaFin = fechaFin;
     }
 
-    public void setS(Sanitario s) {
+    public void setSanitario(Sanitario s) {
         this.s = s;
     }
-    public Sanitario getS() {
+    public Sanitario getSanitario() {
         return s;
     }
 
-    public void setP(Puerta p) {
+    public void setPuerta(Puerta p) {
         this.p = p;
     }
-    public Puerta getP() {
+    public Puerta getPuerta() {
         return p;
     }
 

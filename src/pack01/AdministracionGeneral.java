@@ -356,19 +356,18 @@ public class AdministracionGeneral {
         }
     }
 
-    public void modificacionTrabajadorS(String columna, String dato, String dni){
-        String consultaSQL = "UPDATE Trabajador SET " + columna + " = " +"\"" +dato + "\""+ " WHERE dni = " + "\""+dni+"\"";
+    public void borrarTrabajadorBD(String dni){
+        String consultaSQL = "DELETE FROM sanitario WHERE dni = ?";
 
         try{
             System.out.println(consultaSQL);
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
-            Statement sentencia = conexion.createStatement();
+            sentencia2 = conexion.prepareStatement(consultaSQL);
+            sentencia2.setString(1, dni);
+            sentencia2.executeUpdate();
 
-            System.out.println(consultaSQL);
-            sentencia.executeUpdate(consultaSQL);
-
-            sentencia.close();
+            sentencia2.close();
             conexion.close();
         } catch  (ClassNotFoundException cn) {
             cn.printStackTrace();
@@ -377,25 +376,138 @@ public class AdministracionGeneral {
         }
     }
 
-    public void modificacionTrabajadorI(String columna, String dato, String dni){
-        String consultaSQL = "UPDATE Trabajador SET " + columna + " = " + dato + " WHERE dni = " + "\""+dni+"\"";
 
-        try{
-            System.out.println(consultaSQL);
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
-            Statement sentencia = conexion.createStatement();
+    public void modificacionTrabajador(Trabajador t){
+        boolean respuesta = true;
+        String dni;
+        String nombre;
+        String apellido1;
+        String apellido2;
+        String consultaSQL;
+        int edad;
+        do{
+            System.out.println("Que datos desea modoficar=");
+            MostrarObjetoPantalla.muestraTrabajador(t);
 
-            System.out.println(consultaSQL);
-            sentencia.executeUpdate(consultaSQL);
+            switch (ControlDeEntradas.entradaOpcion(5)){
 
-            sentencia.close();
-            conexion.close();
-        } catch  (ClassNotFoundException cn) {
-            cn.printStackTrace();
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
+                case 1:
+                    System.out.println("Introduzca el nuevo DNI:");
+                    dni = ControlDeEntradas.entradaString();
+                    consultaSQL = "UPDATE Trabajador SET dni = " + "\"" + dni + "\"" + " WHERE dni = " + "\"" + dni + "\"";
+
+                    try{
+                        System.out.println(consultaSQL);
+                        Class.forName("com.mysql.cj.jdbc.Driver");
+                        Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+                        Statement sentencia = conexion.createStatement();
+
+                        System.out.println(consultaSQL);
+                        sentencia.executeUpdate(consultaSQL);
+
+                        sentencia.close();
+                        conexion.close();
+                    } catch  (ClassNotFoundException cn) {
+                        cn.printStackTrace();
+                    } catch(SQLException e){
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("Introduzca el nuevo nombre: ");
+                    nombre = ControlDeEntradas.entradaString();
+                    consultaSQL = "UPDATE Trabajador SET nombre = " + "\n" + nombre + "\n" + " WHERE dni = " + "\"" + t.getDni() + "\"";
+
+                    try{
+                        System.out.println(consultaSQL);
+                        Class.forName("com.mysql.cj.jdbc.Driver");
+                        Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+                        Statement sentencia = conexion.createStatement();
+
+                        System.out.println(consultaSQL);
+                        sentencia.executeUpdate(consultaSQL);
+
+                        sentencia.close();
+                        conexion.close();
+                    } catch  (ClassNotFoundException cn) {
+                        cn.printStackTrace();
+                    } catch(SQLException e){
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Introduzca el nuevo primer apellido: ");
+                    apellido1 = ControlDeEntradas.entradaString();
+                    consultaSQL = "UPDATE Trabajador SET apellido1 = " + "\n" + apellido1 + "\n" + " WHERE dni = " + "\"" + t.getDni() + "\"";
+
+                    try{
+                        System.out.println(consultaSQL);
+                        Class.forName("com.mysql.cj.jdbc.Driver");
+                        Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+                        Statement sentencia = conexion.createStatement();
+
+                        System.out.println(consultaSQL);
+                        sentencia.executeUpdate(consultaSQL);
+
+                        sentencia.close();
+                        conexion.close();
+                    } catch  (ClassNotFoundException cn) {
+                        cn.printStackTrace();
+                    } catch(SQLException e){
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Introduzca el nuevo primer apellido: ");
+                    apellido2 = ControlDeEntradas.entradaString();
+                    consultaSQL = "UPDATE Trabajador SET apellido2 = " + "\n" + apellido2 + "\n" + " WHERE dni = " + "\"" + t.getDni() + "\"";
+
+                    try{
+                        System.out.println(consultaSQL);
+                        Class.forName("com.mysql.cj.jdbc.Driver");
+                        Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+                        Statement sentencia = conexion.createStatement();
+
+                        System.out.println(consultaSQL);
+                        sentencia.executeUpdate(consultaSQL);
+
+                        sentencia.close();
+                        conexion.close();
+                    } catch  (ClassNotFoundException cn) {
+                        cn.printStackTrace();
+                    } catch(SQLException e){
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Introduzca el nuevo primer apellido: ");
+                    edad = ControlDeEntradas.entradaoEnteroPositivo();
+                    consultaSQL = "UPDATE Trabajador SET apellido1 = " + edad + " WHERE dni = " + "\"" + t.getDni() + "\"";
+
+                    try{
+                        System.out.println(consultaSQL);
+                        Class.forName("com.mysql.cj.jdbc.Driver");
+                        Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+                        Statement sentencia = conexion.createStatement();
+
+                        System.out.println(consultaSQL);
+                        sentencia.executeUpdate(consultaSQL);
+
+                        sentencia.close();
+                        conexion.close();
+                    } catch  (ClassNotFoundException cn) {
+                        cn.printStackTrace();
+                    } catch(SQLException e){
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+        }while(!respuesta);
+
     }
 
     public Trabajador recuperarTrabajador(String dni){
@@ -429,5 +541,33 @@ public class AdministracionGeneral {
             e.printStackTrace();
         }
         return t;
+    }
+
+    public void mostrarTodosLosTrabajadores(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(URL,USER,PASSWORD);
+            Statement sentencia = conexion.createStatement();
+            ResultSet resul = sentencia.executeQuery("SELECT * FROM Trabajador");
+
+            while(resul.next()){
+                System.out.println("DNI: "+resul.getString("dni"));
+                System.out.println("Nombre: "+resul.getString("nombre"));
+                System.out.println("Numero: "+resul.getString("apellido1"));
+                System.out.println("Primer apellido: "+resul.getString("apellido2"));
+                System.out.println("Segundo apellido: "+resul.getInt("edad"));
+                System.out.println("-----------------------------------------------\n");
+            }//fin del while
+            //cerramos resulSet
+            resul.close();
+            //cerramos Statement
+            sentencia.close();
+            //cerramos conexión
+            conexion.close();
+        } catch  (ClassNotFoundException cn) {
+            cn.printStackTrace();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 }

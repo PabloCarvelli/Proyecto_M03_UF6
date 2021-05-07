@@ -1,5 +1,6 @@
 package pack01;
 
+import java.sql.SQLSyntaxErrorException;
 import java.time.LocalDate;
 
 public class Menu {
@@ -720,12 +721,19 @@ public class Menu {
                 case 2:
                     System.out.println("Modificar un trabajador.");
                     System.out.println("Introdusca en DNI del trabajador:");
+                    t = adG.recuperarTrabajador(ControlDeEntradas.entradaString());
+                    adG.modificacionTrabajador(t);
                     seguir = true;
                     break;
                 case 3:
+                    System.out.println("Eliminar un trabajador.");
+                    System.out.println("Introdusca en DNI del trabajador:");
+                    t = adG.recuperarTrabajador(ControlDeEntradas.entradaString());
+                    adG.borrarTrabajadorBD(t.getDni());
                     seguir = true;
                     break;
                 case 4:
+                    adG.mostrarTodosLosTrabajadores();
                     seguir = true;
                     break;
                 case 5:
